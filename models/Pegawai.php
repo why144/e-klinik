@@ -3,6 +3,8 @@
 namespace app\models;
 
 use Yii;
+use app\models\Transaksi;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "pegawai".
@@ -63,6 +65,13 @@ class Pegawai extends \yii\db\ActiveRecord
             'alamat' => 'Alamat',
             'gaji' => 'Gaji',
         ];
+    }
+
+    public static function  getAllPegawai() {
+        $pegawai = Pegawai::find()->all();
+        $pegawai = ArrayHelper::map($pegawai, 'id_pegawai', 'nama_pegawai');
+        return $pegawai;
+        
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "pasien".
@@ -41,6 +42,13 @@ class Pasien extends \yii\db\ActiveRecord
         ];
     }
 
+    public static function  getAllPasien() 
+    {
+        $pasien = Pasien::find()->all();
+        $pasien = ArrayHelper::map($pasien, 'id_pasien', 'nama_pasien');
+        return $pasien;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -61,5 +69,6 @@ class Pasien extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
+    
     
 }

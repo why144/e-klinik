@@ -23,6 +23,8 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'id_pasien') ?>
 
     <?= $form->field($model, 'id_pegawai') ?>
+    
+    <?= $form->field($model, 'jenis_transaksi') ?>
 
     <?= $form->field($model, 'id_tindakan') ?>
 

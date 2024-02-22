@@ -11,6 +11,7 @@ use yii\helpers\ArrayHelper;
  * @property int $id_transaksi
  * @property int $id_pasien
  * @property int $id_pegawai
+ * @property int $jenis_transaksi
  * @property int $id_tindakan
  * @property int $obat
  * @property int $jumlah_bayar
@@ -33,10 +34,11 @@ class Transaksi extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_pasien', 'id_pegawai', 'id_tindakan', 'obat', 'jumlah_bayar', 'tgl_transaksi', 'status_pemabayaran'], 'required'],
+            [['id_pasien', 'id_pegawai', 'jenis_transaksi', 'id_tindakan', 'obat', 'jumlah_bayar', 'tgl_transaksi', 'status_pembayaran'], 'required'],
             [['id_pasien', 'id_pegawai', 'id_tindakan', 'obat', 'jumlah_bayar'], 'integer'],
+            [['jenis_transaksi'], 'string', 'max' => 32],
             [['tgl_transaksi'], 'safe'],
-            [['status_pemabayaran'], 'string', 'max' => 12],
+            [['status_pembayaran'], 'string', 'max' => 12],
         ];
     }
 
@@ -49,17 +51,14 @@ class Transaksi extends \yii\db\ActiveRecord
             'id_transaksi' => 'Id Transaksi',
             'id_pasien' => 'Id Pasien',
             'id_pegawai' => 'Id Pegawai',
+            'jenis_transaksi' => 'Jenis Transaksi',
             'id_tindakan' => 'Id Tindakan',
             'obat' => 'Obat',
             'jumlah_bayar' => 'Jumlah Bayar',
             'tgl_transaksi' => 'Tgl Transaksi',
-            'status_pemabayaran' => 'Status Pemabayaran',
+            'status_pembayaran' => 'Status Pembayaran',
         ];
     }
 
-      function  getAllPegawai() {
-    $pegawai = Transaksi::find()->all();
-    $pegawai = ArrayHelper::map($pegawai, 'id_pegawai', 'nama_lengkap');
     
-    }
 }

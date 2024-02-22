@@ -34,11 +34,12 @@ $this->params['breadcrumbs'][] = $this->title;
             'id_transaksi',
             'id_pasien',
             'id_pegawai',
+            'jenis_transaksi',
             'id_tindakan',
             'obat',
             'jumlah_bayar',
             'tgl_transaksi',
-            'status_pemabayaran',
+            'status_pembayaran',
         ],
     ]) ?>
 

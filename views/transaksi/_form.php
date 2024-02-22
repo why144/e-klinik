@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use kartik\select2\Select2;
 use yii\widgets\ActiveForm;
 
 /** @var yii\web\View $this */
@@ -12,18 +13,50 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'id_pasien')->textInput() ?>
+    <?= $form->field($model, 'id_pasien')->widget(Select2::classname(), [
+            'data' => $namaPasien,
+            'options' => ['placeholder' => 'Pilih Nama Pasien'],
+            'hideSearch' => true,
+            'pluginOptions' => [
+                'allowClear' => true
+            ],
+        ])->label('Nama Pasien'); 
+        ?>
+    <?= $form->field($model, 'id_pegawai')->widget(Select2::classname(), [
+            'data' => $namaPegawai,
+            'options' => ['placeholder' => 'Pilih Nama Pegawai'],
+            'hideSearch' => true,
+            'pluginOptions' => [
+                'allowClear' => true
+            ],
+        ])->label('Nama Pegawai'); 
+        ?>
 
-    <?= $form->field($model, 'id_pegawai')->textInput() ?>
+    <?= $form->field($model, 'jenis_transaksi')->widget(Select2::classname(), [
+            'data' => ['Beli Obat','Konsultasi', 'Konsultasi + Beli Obat'],
+            'options' => ['placeholder' => 'Pilih Jenis Transaksi'],
+            'hideSearch' => true,
+            'pluginOptions' => [
+                'allowClear' => true
+            ],
+        ]); ?>
 
-    <?= $form->field($model, 'id_tindakan')->textInput() ?>
+    <?= $form->field($model, 'id_tindakan')->textInput()->label('Tindakan') ?>
 
     <?= $form->field($model, 'obat')->textInput() ?>
 
     <?= $form->field($model, 'jumlah_bayar')->textInput() ?>
 
 
-    <?= $form->field($model, 'status_pemabayaran')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'status_pembayaran')->widget(Select2::classname(), [
+            'data' => ['Lunas', 'Belum Lunas'],
+            'options' => ['placeholder' => 'Pilih Status Pembayaran'],
+            'hideSearch' => true,
+            'pluginOptions' => [
+                'allowClear' => true
+            ],
+        ]); ?>
+
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

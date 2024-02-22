@@ -18,7 +18,7 @@ class TransaksiSearch extends Transaksi
     {
         return [
             [['id_transaksi', 'id_pasien', 'id_pegawai', 'id_tindakan', 'obat', 'jumlah_bayar'], 'integer'],
-            [['tgl_transaksi', 'status_pemabayaran'], 'safe'],
+            [['tgl_transaksi', 'status_pembayaran', 'jenis_transaksi'], 'safe'],
         ];
     }
 
@@ -61,13 +61,14 @@ class TransaksiSearch extends Transaksi
             'id_transaksi' => $this->id_transaksi,
             'id_pasien' => $this->id_pasien,
             'id_pegawai' => $this->id_pegawai,
+            'jenis_transaksi' => $this->jenis_transaksi,
             'id_tindakan' => $this->id_tindakan,
             'obat' => $this->obat,
             'jumlah_bayar' => $this->jumlah_bayar,
             'tgl_transaksi' => $this->tgl_transaksi,
         ]);
 
-        $query->andFilterWhere(['like', 'status_pemabayaran', $this->status_pemabayaran]);
+        $query->andFilterWhere(['like', 'status_pembayaran', $this->status_pembayaran]);
 
         return $dataProvider;
     }

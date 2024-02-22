@@ -2,8 +2,11 @@
 
 namespace app\controllers;
 
+use app\models\Pasien;
+use app\models\Pegawai;
 use app\models\Transaksi;
 use app\models\TransaksiSearch;
+use Codeception\Lib\Di;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -55,8 +58,12 @@ class TransaksiController extends Controller
      */
     public function actionView($id_transaksi)
     {
+        $namaPasien = Pasien::getAllPasien();
+        $namaPegawai = Pegawai::getAllPegawai();
         return $this->render('view', [
             'model' => $this->findModel($id_transaksi),
+            'namaPasien' => $namaPasien,
+            'namaPegawai' => $namaPegawai
         ]);
     }
 
@@ -68,10 +75,12 @@ class TransaksiController extends Controller
     public function actionCreate()
     {
         $model = new Transaksi();
+        $namaPasien = Pasien::getAllPasien();
+        $namaPegawai = Pegawai::getAllPegawai();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) ) {
-                $model->tgl_transaksi = date('yyyy-mm-dd');
+                $model->tgl_transaksi = date('Y-m-d');
                 $model->save();
                 return $this->redirect(['view', 'id_transaksi' => $model->id_transaksi]);
             }
@@ -81,6 +90,8 @@ class TransaksiController extends Controller
 
         return $this->render('create', [
             'model' => $model,
+            'namaPasien' => $namaPasien,
+            'namaPegawai' => $namaPegawai
         ]);
     }
 
